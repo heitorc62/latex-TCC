@@ -1,11 +1,11 @@
-\section{Aplicação de \emph{Machine Learning} no projeto}
+\chapter{Aplicação de \emph{Machine Learning} no projeto}
 No projeto \emph{TomatoHealth}, que possui a funcionalidade de detecção de doenças em imagens de folhas de tomate, as técnicas de \emph{Machine Learning} desempenham um papel fundamental. No campo da visão computacional aplicada à agricultura, é comum o uso de modelos de Inteligência Artificial para tarefas como classificação de imagens ou detecção de objetos.
 
 Esses métodos tornam-se indispensáveis em situações onde a complexidade do problema torna impraticável ou mesmo impossível desenvolver um programa de computador tradicional baseado em regras fixas capaz de oferecer uma boa solução. Como por exemplo, determinar a doença presente em uma folha a partir de sua imagem. Em casos como esse, recorremos a técnicas de aprendizado de máquina, que oferecem a capacidade de aprender padrões complexos a partir de dados.
 
 No contexto de aprendizado de máquina supervisionado, é necessário dispor de um conjunto de dados rotulados. Esses dados são usados para treinar o modelo de IA, permitindo que ele aprenda a identificar os padrões que caracterizam cada rótulo. Uma vez treinado, o modelo é capaz de generalizar esse conhecimento para realizar predições precisas em novos dados de entrada, predizendo seus rótulos.
 
-\subsection{Classificação vs Detecção}
+\section{Classificação vs Detecção}
 Para que o processo de treinamento do modelo de visão computacional seja possível, primeiro é necessário escolher a arquitetura de rede neural que será utilizada. Contudo, ainda antes disso, é necessário definir qual é a tarefa que devemos realizar e um \emph{dataset} já existente para efetuar o treinamento desse primeiro modelo que será integrado à plataforma.
 
 Até agora, a expressão: ``detecção de doenças em imagens de folhas de plantas''; que resume qual é o objetivo do modelo de visão computacional incorporado ao \emph{TomatoHealth} ainda não foi muito bem definida.
@@ -28,7 +28,7 @@ Considerando o fato do \emph{PlantDoc} ter sido construído após a constataçã
 
 Para performar essa tarefa de detecção de objetos, escolhemos a família de modelos \emph{YOLO}, que explicaremos em detalhes na seção \ref{sec:modelo}
 
-\subsection{Entendendo detecção de objetos em \emph{Machine Learning}}
+\section{Entendendo detecção de objetos em \emph{Machine Learning}}
 A detecção de objetos tem o objetivo de resolver uma das questões fundamentais de aplicações de visão computacional. Identificar o que são os objetos e onde eles estão localizados nas imagens. Isso é feito por meio da detecção de instâncias de objetos pertencentes à classes específicas nas imagens em questão, com o uso de \emph{bounding boxes} --- retângulos que envolvem os objetos detectados e indicam sua classe \citep{Zou2019Object}.
 
 \begin{figure}[htb!]
@@ -46,7 +46,7 @@ A tarefa de detectar objetos em imagens não é nova, e por ter muitas aplicaç�
 
 O motivo da aceleração significativa na produção de conhecimento científico nessa área do conhecimento foi uma mudança de paradigma considerável: a introdução de técnicas de \emph{deep learning} nessa tarefa de visão computacional. Dessa forma, podemos afirmar que a história da detecção de objetos pode ser compreendida a partir de dois períodos históricos que iremos abordar a seguir: detecção de objetos com uma abordagem tradicional (anterior a 2014) e detecção de objetos baseada em \emph{deep learning} (depois de 2014) \citep{Zou2019Object}.
 
-\subsubsection{Detecção de objetos com uma abordagem tradicional}
+\subsection{Detecção de objetos com uma abordagem tradicional}
 Antes do advento das técnicas de \emph{deep learning}, os métodos para detecção de objetos em imagens dependiam da extração manual de representações (características) eficazes para a inferência esperada. Os algoritmos mais eminentes dessa época utilizavam janelas deslizantes na imagem com filtros compostos pelas características extraídas manualmente. 
 
 Por exemplo, no algorítimo de Viola-Jones, a imagem é percorrida por janelas deslizantes de diversas escalas contendo características presentes em rostos humanos (Haar \emph{features}). Dessa forma, a depender da correspondência das características com a imagem, uma face poderia ser acusada como detectada ou não naquela localidade, isso é feito com classificadores em cascata \citep{Viola}.
@@ -57,10 +57,10 @@ De maneira geral, perceba que podemos resumir as abordagens tradicionais de dete
 
 Contudo, essas abordagens eram limitadas e os novos métodos com \emph{deep learning} superaram os desempenhos desses algoritmos mais tradicionais \citep{Zou2019Object}.
 
-\subsubsection{Detecção de objetos baseada em \emph{deep learning}}
+\subsection{Detecção de objetos baseada em \emph{deep learning}}
 Depois de um tempo, a performance de detectores de objetos com representações extraídas manualmente chegou a ficar saturada. Então, com o advento das técnicas de \emph{deep learning}, especialmente das redes neurais convolucionais (\emph{CNNs}), passou a ser possível processar imagens em seu formato bruto e obter automaticamente representações de alto nível de suas características. Isso impulsionou um avanço significativo na precisão e eficiência dos métodos de detecção de objetos, marcando um salto evolutivo nessa tarefa de visão computacional \citep{Zou2019Object}.
 
-\subsubsubsection{Fundamentos de redes neurais convolucionais}
+\subsubsection{Fundamentos de redes neurais convolucionais}
 Redes neurais podem ser entendidas como funções não lineares extremamente complexas. Esse artifício matemático é constituído por nós --- neurônios --- organizados em camadas. Cada nó efetua uma combinação linear dos valores oriundos dos nós da camada anterior e então passa o resultado dessa operação por uma função não linear --- função de ativação. 
 
 Podemos pensar que a relação entre os dados de entrada de um \emph{dataset} e cada um dos seus rótulos é regida por uma função. Por meio do método do gradiente descendente e da técnica de \emph{backpropagation}, conseguimos fazer com que os parâmetros da rede neural (pesos das combinações lineares) se adaptem de modo a reproduzir essa função.
@@ -73,7 +73,7 @@ As redes neurais convolucionais são uma evolução das redes neurais convencion
 
 \paragraph{Camadas \emph{fully connected}} são camadas semelhantes às presentes nas redes neurais originais. Geralmente são utilizadas para relacionar --- de maneira treinável --- os resultados das camadas abordadas anteriormente. Constituem camadas que utilizam as características extraídas pelas camadas convolucionais e de \emph{pooling}, para efetuar a classificação. Isso, no caso de um problema de classificação, evidentemente.
 
-\subsubsubsection{Principais modelos para detecção de objetos com \emph{deep learning}}
+\subsubsection{Principais modelos para detecção de objetos com \emph{deep learning}}
 Com o avanço do \emph{deep learing} e das redes convolucionais, esses novos conceitos foram introduzidos ao contexto de detecção de objetos com a introdução de \emph{Regions with CNN features} (\emph{RCNNs}) \citep{Zou2019Object, rcnn1, rcnn2}.
 
 A ideia por trás do conceito de \emph{RCNN} é bem direta. Primeiro um conjunto de regiões na imagem é obtido por meio de algoritmos de busca. Depois disso, as representações de cada região é obtida ao passá-las (adaptadas para um tamanho fixo) por uma rede convolucional. Por fim, classificadores como \emph{SVMs} \citep{Zou2019Object}.
@@ -88,15 +88,15 @@ Depois disso, \cite{fastRCNN} introduziu a \emph{Fast R-CNN}, que possibilitou o
 
 A arquitetura \emph{YOLO (You Only Look Once)} é uma grande representante dessa nova abordagem, permitindo obter as coordenadas das \emph{bounding boxes} e suas classificações em uma única passagem pela rede neural, viabilizando a detecção de objetos em tempo real. Pioneira na detecção de objetos em uma etapa, a arquitetura \emph{YOLO} ganhou popularidade por seus bons resultados em acurácia e velocidade \citep{Zou2019Object}, sendo, por isso, a escolhida para a tarefa de detecção de objetos no \emph{TomatoHealth}.
 
-\subsection{\emph{YOLO} (\emph{You Only Look Once}) \label{sec:yolo}}
+\section{\emph{YOLO} (\emph{You Only Look Once}) \label{sec:yolo}}
 \label{sec:modelo}
-\subsubsection{Contextualização}
+\subsection{Contextualização}
 A arquitetura de rede neural para detecção de objetos \emph{YOLO} foi introduzida em 2016 com o trabalho de \cite{yolo}. Desde então, diversas evoluções e melhorias foram incorporadas ao modelo. Ao longo dos anos, novas versões dessa arquitetura foram lançadas, indo do \emph{YOLOv1} ao \emph{YOLOv8} em 2023 e até mesmo modelos mais atuais como o \emph{YOLO11}, lançado em 2024 \citep{yolo, yolov8_2023, yolo11_2024}. Por haver mais informação disponível sobre o modelo \emph{YOLOv8} e pelo fato de ainda ser um modelo novo e com performances muito satisfatórias, essa foi a arquitetura escolhida para o projeto. Além disso, apesar dessa evolução entre versões, os conceitos fundamentais e as ideias por trás do \emph{YOLO} ainda podem ser utilizadas para entender seu funcionamento.
 
 
 Na aplicação \emph{TomatoHealth}, utilizamos o modelo \emph{YOLOv8}. No entanto, o propósito deste texto não é aprofundar em detalhes específicos ou otimizações exclusivas desta versão, mas sim oferecer uma visão geral de como o \emph{framework YOLO} funciona. A seguir, apresentaremos os conceitos primeiro introduzidos em 2016 com o \emph{YOLOv1} e então discutiremos os avanços e melhorias que foram incorporados à arquitetura do \emph{YOLOv8}.
 
-\subsubsection{Conceitos fundamentais do \emph{YOLO}}
+\subsection{Conceitos fundamentais do \emph{YOLO}}
 Como já comentado, a principal ideia proposta pela arquitetura \emph{YOLO} é efetuar a detecção de objetos em uma só etapa. Dessa maneira, uma única rede neural faz a predição das \emph{bounding boxes} e das classificações. Com somente um \emph{forward pass}.
 
 \paragraph{Passo a passo do \emph{YOLOv1}:}
@@ -287,7 +287,7 @@ Em que o valor de $\hat{c}_{i,j}$ é 0 e $B$ igual a 2.
 \paragraph{Limitações}
 Apesar de ser uma arquitetura disruptiva que revolucionou o cenário da visão computacional e detecção de objetos, o \emph{YOLOv1} apresentava algumas limitações. Principalmente a incapacidade de detectar muitos objetos, principalmente quando os objetos são pequenos e estão amontoados. (limitação devido às \emph{grid cells}). Além disso, como todas as \emph{bounding boxes} têm sua origem em um processo adaptativo relativo às \emph{grid cells}, o \emph{YOLOv1} tem dificuldade em adaptar as caixas à objetos com proporções variadas \citep{yolo_review}.
 
-\subsubsection{Métricas}
+\subsection{Métricas}
 Para avaliar diferentes modelos de detecção de objetos, temos diversas métricas para quantificar a qualidade do modelo em identificar corretamente objetos em uma imagem. Vamos detalhar as métricas mais comuns, com base nas definições matemáticas do artigo \citep{Padilla2020A}.
 
 \begin{itemize}
@@ -346,7 +346,7 @@ Para avaliar diferentes modelos de detecção de objetos, temos diversas métric
 \end{itemize}
 Essas métricas, especialmente o AP e o mAP, são amplamente utilizadas para avaliar e comparar o desempenho de diferentes modelos de detecção de objetos. Além disso, há diferentes variantes do mAP para diferentes valores de IoU. Por exemplo, AP@50 (que gera a curva AP com o valor de $t$ em 0,5); AP@75 e AP@50:5:95, que entrega diversos valores.
 
-\subsubsection{Avanços da família \emph{YOLO}}
+\subsection{Avanços da família \emph{YOLO}}
 \paragraph{\emph{Backbone}, \emph{neck} e \emph{head}:}
 Com o avanço das arquiteturas para detecção de objetos, nomenclaturas para diferentes partes das redes neural convolucionais começaram a ser 
 utilizadas. Nesse contexto, se destacam o {\bf backbone}, {\bf neck} e {\bf head}. Por isso, como parte da explicação sobre a evolução da família \emph{YOLO}, é interessante abordar a função de cada uma dessas partes dos detectores de objetos.
@@ -392,11 +392,11 @@ Essas inovações resultaram em um desempenho superior do \emph{YOLOv8} em compa
 Infelizmente, não houve a publicação de um artigo científico oficial da \emph{Ultralytics} para que possamos saber com facilidade o passo a passo do funcionamento do modelo \emph{YOLOv8}. Além disso, o repositório do \emph{Github} que contém a codificação da arquitetura do modelo está passando por atualizações constantes, com as modificações do código fonte do \emph{YOLOv8} para novos códigos, que originaram o \emph{YOLO11}. Dessa forma, consideramos que a profundidade da explicação feita sobre o \emph{YOLOv8} é o bastante para o intuito desse trabalho de formatura supervisionado.
 
 
-\subsection{Materiais e métodos}
+\section{Materiais e métodos}
 \label{sec:treinamento}
 Depois de escolhermos o modelo \emph{YOLOv8} para realizar a detecção de objetos no projeto \emph{TomatoHealth}, chegou o momento de treiná-lo para que ele tivesse a capacidade de detectar as doenças em folhas de tomate. Como comentado anteriormente, o \emph{dataset} escolhido para essa tarefa foi o \emph{PlantDoc}, mas com o escopo reduzido para doenças em folhas de tomate.
 
-\subsubsection{Processamento do \emph{dataset}}
+\subsection{Processamento do \emph{dataset}}
 Para obtermos o \emph{dataset} das doenças em folhas de tomate, precisamos então realizar uma filtragem no \emph{PlantDoc} para que somente imagens que possuam rótulos de doenças de tomate (e esses rótulos em si) permanecessem na versão do \emph{dataset} que seria utilizada para treinar o modelo.
 
 Para fazer isso, primeiro obtemos o conjunto de dados \emph{PlantDoc} a partir da plataforma \emph{Dataset Ninja}\footnote{\url{https://datasetninja.com/plantdoc}} --- essa plataforma disponibiliza conjuntos de dados para uso em projetos de \emph{Machine Learning}. Depois disso, no processo de filtragem do \emph{dataset}, também precisamos fazer adaptações no formato dos \emph{rótulos} e da estrutura de diretórios para que tivéssemos um conjunto de dados adaptado para a arquitetura \emph{YOLO}.
@@ -406,22 +406,21 @@ Sobre os rótulos, o formato inicial define as \emph{bounding boxes} a partir do
 Inicialmente, a estrutura de diretórios apresentava o seguinte formato:
 \begin{verbatim}
 treino/
-├── imgs/
-└── rótulos/
+|-- imgs/
+|-- rótulos/
 teste/
-├── imgs/
-└── rótulos/
+|-- imgs/
+|-- rótulos/
 \end{verbatim}
 Para o uso com o \emph{YOLO}, a organização de diretórios precisa ser ajustada para separar as imagens e os rótulos em diretórios específicos, com subdiretórios para treino e teste. A estrutura correta é:
 \begin{verbatim}
 imgs/
-├── treino/
-└── teste/
+|-- treino/
+|-- teste/
 rótulos/
-├── treino/
-└── teste/  
+|-- treino/
+|-- teste/
 \end{verbatim}
-
 Ao final de todo esse processamento, restaram as seguintes classes no \emph{dataset}:
 
 \begin{table}[h!]
@@ -455,7 +454,7 @@ Ao final de todo esse processamento, restaram as seguintes classes no \emph{data
 
 Totalizando 721 imagens, 2840 anotações e uma média de 3.93897 anotações por imagem. Na figura \ref{fig:distribuicao-ann-cls} é possível enxergar a distribuição de anotações por classes. É notável que a classe \emph{Tomato two spotted spider mites leaf} possui um número muito pequeno de exemplos. Contudo, como o intuito do projeto é, justamente estender o atual conjunto de dados com novas imagens e novas anotações, decidimos não desconsiderar essa classe e mantê-la no conjunto de dados.
 
-\subsubsection{Treinamento}
+\subsection{Treinamento}
 \label{sec:treinamento2}
 Após o pré-processamento, o conjunto de dados foi adequadamente estruturado para ser utilizado pelo \emph{YOLO}. Com isso, o próximo passo foi realizar o treinamento do modelo. Executamos um processo de ajuste fino (\emph{fine-tuning}) do \emph{YOLOv8n} (uma versão mais leve do \emph{YOLOv8}), previamente treinado no \emph{dataset} COCO\footnote{\url{https://yolov8.org/yolov8-coco-dataset/}} \cite{COCO}.
 
@@ -484,7 +483,7 @@ Para realizar o ajuste fino, foram utilizadas duas abordagens principais:
 \end{itemize}
 Para treinar o modelo, utilizamos a rede de computadores (\emph{vision, e-science}) com placas de vídeo (\emph{GPU}). Mais especificamente a máquina chamada \emph{deepthree}, com 200\emph{GB} de RAM e equipada com a placa de vídeo \emph{NVIDIA GeForce GTX 1080 Ti} com 12\emph{GB} de memória.
 
-\subsubsection{Resultados}
+\subsection{Resultados}
 \label{sec:resultados}
 Com o \emph{dataset} que obtivemos após o processamento e utilizando o \emph{YOLOv8n}, decidimos fazer um treinamento por 300 épocas. As ferramentas fornecidas pela \emph{Ultralytics} facilitam muito esse processo. O parâmetro \emph{EarlyStopping(patience=100)} define que o treinamento para após 100 épocas sem melhorias nas métricas de avaliação. Então, após 183 épocas o treinamento foi finalizado já que o melhor modelo encontrado foi do final da época de número 83. O treino com 183 épocas e utilizando as configurações de hardware mencionadas na seção \ref{sec:treinamento2}, leva cerca de 30 minutos e resulta em um arquivo de pesos de cerca de 6\emph{MB}. Os resultados obtidos podem ser vistos na figura \ref{fig:resultados-treinamento}.
 
@@ -495,24 +494,25 @@ Com o \emph{dataset} que obtivemos após o processamento e utilizando o \emph{YO
     \label{fig:resultados-treinamento}
 \end{figure}
 
-O melhor valor da métrica \emph{mAP@50-95} obtido após o treinamento foi: 34,437; Se compararmos esse valor com os melhores resultados do \emph{YOLOv8} na referência de performance do \emph{dataset COCO} (37.3) conseguimos notar que, pelo menos na teoria, o conjunto de dados está performando bem.
+O melhor valor da métrica \emph{mAP\string@50-95} obtido após o treinamento foi: 34,437; Se compararmos esse valor com os melhores resultados do \emph{YOLOv8} na referência de performance do \emph{dataset COCO} (37.3) conseguimos notar que, pelo menos na teoria, o conjunto de dados está performando bem.
 
 Apesar do intuito do \emph{TomatoHealth} ser a construção de um conjunto de dados robusto no domínio de detecção de doenças em folhas de tomate, pensamos que em um momento inicial é interessante ter um modelo que seja o melhor possível. 
 
 Assim, devido ao pequeno número de exemplos que possuímos inicialmente nesse \emph{dataset}, reconhecemos que essa métrica de 34,437 pode estar superestimada e isso pode ser observado nas figuras \ref{fig:val-pred} e \ref{fig:val-labels} (predições incorretas no conjunto de validação). Então, consideramos uma estratégia para tentar melhorar essa performance inicial. Essa estratégia será discutida na seção \ref{sec:integrando-resultados}.
-
-\begin{figure}[htb!]
+\begin{figure}[H]
     \centering
-    \begin{minipage}[t]{0.45\textwidth}
+    \begin{subfigure}[t]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/val_batch0_pred.jpg}
-        \caption{\label{fig:val-pred} Exemplo de detecção de objetos em imagens do conjunto de validação. Imagem extraída do acervo dos autores.}
-
-    \end{minipage}\hfill
-    \begin{minipage}[t]{0.45\textwidth}
+        \caption{Exemplo de deteccao de objetos em imagens do conjunto de validação. Imagem extraída do acervo dos autores.}
+        \label{fig:val-pred} 
+    \end{subfigure}\hfill
+    \begin{subfigure}[t]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/val_batch0_labels.jpg}
-        \caption{\label{fig:val-labels} Exemplo de rótulos de objetos. Imagem extraída do acervo dos autores.}
-
-    \end{minipage}
+        \caption{Exemplo de rotulos de objetos. Imagem extraída do acervo dos autores.}
+        \label{fig:val-labels}
+    \end{subfigure}
+    \caption{Comparação entre a detecção de objetos e os rotulos originais.}
+    \label{fig:comparison}
 \end{figure}

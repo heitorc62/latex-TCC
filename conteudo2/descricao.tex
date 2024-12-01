@@ -1,7 +1,7 @@
 \chapter{Descrição do problema e do sistema proposto}
 Como comentado, o presente trabalho é motivado pela carência de conjuntos de dados abertos e robustos de imagens de doenças em folhas de plantas, que possibilitem o desenvolvimento de modelos de visão computacional com aplicabilidade prática no cotidiano dos produtores rurais.
 
-\subsection{Considerações}
+\section{Considerações}
 Para que um conjunto de dados com essa potencialidade seja desenvolvido, é preciso levar em conta algumas considerações importantes. Dentre elas, podemos destacar as seguintes:
 
 \begin{enumerate}
@@ -33,10 +33,10 @@ Além disso, a inclusão desses dados ``repetidos'' pode levar a uma similaridad
 \end{enumerate}
 
 
-\subsection{Solução proposta}
+\section{Solução proposta}
 Com o levantamento dessas considerações, formulamos uma abordagem de construção colaborativa de conjuntos de dados para detecção de doenças de plantas que se propõe a ser uma possível solução para a escassez de \emph{datasets} robustos, volumosos, confiáveis e abertos nesse domínio.
 
-\subsubsection{Redução do Escopo}
+\subsection{Redução do Escopo}
 Para o desenvolvimento dessa solução, primeiramente reduzimos o escopo das tarefas propostas por grandes \emph{datasets} desse domínio \citep{Yao2023}. Tanto o \emph{PlantDoc} (um \emph{dataset} alternativo ao \emph{PlantVillage}, que oferece imagens sem a característica de imagens de ``laboratório'') quanto o próprio \emph{PlantVillage}, por exemplo, têm em suas classes o seguinte formato:
 \begin{center}
     \texttt{(<espécie> : <condição>)}
@@ -45,7 +45,7 @@ Ou seja, além de identificar a doença que afeta a planta, o modelo também tem
 
 A escolha dessa cultura na redução do escopo do trabalho se deu pelo fato da hortaliça ser uma das mais consumidas no mundo e da tomaticultura ser de imensa importância no setor da agricultura brasileira, sendo uma das principais fontes de emprego e renda da produção agrícola e tendo um valor de produção bruto superior a 12,4 bilhões de reais em 2022, de acordo com dados do IBGE e matéria publicada no portal Revista Rural \footnote{\url{https://www.revistarural.com.br/2022/10/14/tecnologias-impulsionam-producao-nacional-do-tomate/}}.
 
-\subsection{\emph{TomatoHealth}}
+\section{\emph{TomatoHealth}}
 Desse modo, a ideia da solução proposta é implementar uma plataforma chamada \emph{TomatoHealth} que oferece a funcionalidade de detecção de doenças em folhas de tomate por meio de uma aplicação \emph{web}. Por meio dessa aplicação, os usuários podem submeter imagens das folhas de suas plantas e a aplicação retorna uma resposta sobre as doenças detectadas.
 
 Para que isso ofereça uma possível solução para a escassez de conjuntos de dados robustos na tarefa de detecção de doenças em plantas, as imagens enviadas pelos usuários passam a fazer parte de um banco de dados. 
@@ -82,11 +82,11 @@ Não foi abordada por essa primeira versão de implementação do \emph{TomatoHe
 
 Caso a imagem que está sendo revisada apresente um grau de semelhança elevada com outras imagens que já fazem parte do conjunto de dados, o especialista terá a opção de descartar a amostra em questão. Essa funcionalidade, que fará com que a solução proposta contemple todas as considerações feitas no trabalho será melhor descrita na seção ~\ref{sec:próximos passos}.
 
-\subsection{{Detalhes ``abstratos'' sobre o sistema} \label{sec:abst-det}}
+\section{{Detalhes ``abstratos'' sobre o sistema} \label{sec:abst-det}}
 
 Nessa seção, iremos descrever as capacidades esperadas do sistema desenvolvido sem detalhes de implementação.
 
-\subsubsection{{Storyboard do sistema}}
+\subsection{{Storyboard do sistema}}
 
 Uma ótima forma de começar o desenvolvimento de um sistema é demonstrar seus casos de uso e aplicações no mundo real por meio de um \textit{Storyboard}. Uma técnica muito empregada por estúdios de animação, pois produzir desenhos para cada quadro de uma animação é uma tarefa demorada, e desenhar um quadro que não será usado é um desperdício (similar ao desenvolvimento de código). Além de ser rápido de esboçar, o \textit{Storyboard} permite demonstrar informações sobre um sistema que seria dificilmente explicado por texto, e também transmite informações essenciais de um sistema: usuários, contexto, sequência de tarefas de seu sistema e como seu sistema traz satisfação \citep{klemmer2016}. Sendo assim, a Figura \ref{fig:storyboard} demonstra o \textit{Storyboard} feito para o \emph{TomatoHealth}.
 
@@ -109,13 +109,13 @@ Na Figura \ref{fig:storyboard}, enumeramos as ações dos quadrinhos:
     \label{fig:storyboard}
 \end{figure}
 
-\subsubsection{{Descrição geral sobre o sistema}}
+\subsection{{Descrição geral sobre o sistema}}
 
 Já tendo uma breve noção sobre a atuação do \emph{TomatoHealth} por nosso \textit{Storyboard}, também é importante descrever o sistema de maneira geral, para comentar sua pertinência aos assuntos tratados nesse trabalho, e destacar como ele se relaciona ao problema.
 
 As próximas seções separam os componentes do sistema do \emph{TomatoHealth}, para que a Seção \ref{sec:implementacao_sistema} os detalhe de maneira técnica.
 
-\subsubsubsection{{Interface do Usuário Geral} \label{sec:abst-geral}}
+\subsubsection{{Interface do Usuário Geral} \label{sec:abst-geral}}
 
 Nossa interface web deve permitir ao usuário geral:
 
@@ -130,7 +130,7 @@ Uma parte importante dessa interface é estimular o usuário a tirar uma foto de
 
 Com esse objetivo em mente, priorizamos o desenvolvimento \textit{Mobile-first}, e permitimos o usuário a acessar a câmera de seu celular, assim como o instruímos de como tirar uma foto adequada, tanto para um \textit{feedback} quanto um dado melhor em nosso \textit{dataset}.
 
-\subsubsubsection{{Interface do Usuário Especialista} \label{sec:abst-esp}}
+\subsubsection{{Interface do Usuário Especialista} \label{sec:abst-esp}}
 
 Na interface do usuário especialista, ele deve ser capaz de:
 
@@ -142,7 +142,7 @@ Na interface do usuário especialista, ele deve ser capaz de:
 
 Com isso, as imagens ficam com suas classes demarcadas por um quadrado, e inseridas em nosso banco de dados, para retreinamento do nosso modelo. 
 
-\subsubsubsection{{\emph{back-end}}\label{sec:back-end-intro}}
+\subsubsection{{\emph{back-end}}\label{sec:back-end-intro}}
 
 Nosso \emph{Back-end} deve comportar:
 
@@ -156,20 +156,20 @@ Nosso \emph{Back-end} deve comportar:
 
 Dessa forma, o sistema faz o treinamento do modelo de maneira periódica com dados revisados por especialistas, e retorna um \textit{feedback} com as detecções do modelo a um usuário comum.
 
-\subsection{{Sistemas similares -- detecção de doenças e sistemas colaborativos}}
+\section{{Sistemas similares -- detecção de doenças e sistemas colaborativos}}
 
 Ao pesquisar por \textit{"plant diagnosis"} na \textit{Google Play} \footnote{\url{https://play.google.com/store/apps/}}, encontramos dezenas de aplicativos capazes de identificar culturas e/ou doenças por meio de fotos. Um dos mais populares, com mais de $10$ milhões de downloads, é o \textit{Plantix} \footnote{\url{https://plantix.net/pt/}}.
 
 Ademais, na pesquisa por sistemas no âmbito de ciência colaborativa, encontramos duas referências semelhantes quanto a nossa proposta de sistema por compartilharem fotos fornecidas por usuários para a utilização em pesquisa, são elas: \textit{iNaturalist} \footnote{\url{https://www.inaturalist.org/}} e \textit{Zooniverse} \footnote{\url{https://www.zooniverse.org/}}.
 
-\subsubsection{{\textit{Plantix}}}
+\subsection{\textit{Plantix}}
 
 Segundo sua página, o aplicativo tem o mesmo propósito de nosso \textit{TomatoHealth}, mas para diversas culturas. Entretanto, além do sistema identificar doenças e propor tratamentos, ele fornece ao usuário o contato com especialistas para sanar dúvidas, e também conta com uma biblioteca sobre doenças em plantas.
 
-\subsubsection{{\textit{iNaturalist}}}
+\subsection{\emph{iNaturalist}}
 
 O \textit{iNaturalist} é uma comunidade onde usuários observam organismos vivos com suas câmeras, obtêm detalhes, e compartilham suas fotos com outros entusiastas. A plataforma também faz com que as fotos sejam compartilhadas com repositórios de dados abertos como o \textit{Global Biodiversity Information Facility} (GBIF), e conecta usuários comuns com especialistas, capazes de identificar diferentes espécies.
 
-\subsubsection{{\textit{Zooniverse}}}
+\subsection{\emph{Zooniverse}}
 
 Já o \textit{Zooniverse} é constituído por projetos em diferentes áreas da ciência: Artes, Biologia, Clima, História, etc., em quais voluntários classificam dados disponibilizados por um projeto e se conectam com especialistas. O propósito da ferramenta é descrito como "pesquisa com base em pessoas", de forma a destacar o papel do voluntário na análise dos dados e no fomento de pesquisas. No dia de hoje (2 de novembro de 2024), o site conta com 2.783.522 voluntários e 846.112.376 classificações.

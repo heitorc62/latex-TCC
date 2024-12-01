@@ -1,0 +1,34 @@
+%!TeX root=../tese.tex
+%("dica" para o editor de texto: este arquivo é parte de um documento maior)
+% para saber mais: https://tex.stackexchange.com/q/78101
+
+% As palavras-chave são obrigatórias, em português e em inglês, e devem ser
+% definidas antes do resumo/abstract. Acrescente quantas forem necessárias.
+\palavraschave{\emph{TomatoHealth}, Aprendizado de Máquina, Visão computacional, Detecção de objetos, \emph{PlantVillage}, \emph{PlantDoc}}
+
+\keywords{TomatoHealth, Machine Learning, Computer Vision, Object Detection, PlantVillage, PlantDoc}
+
+% O resumo é obrigatório, em português e inglês. Estes comandos também
+% geram automaticamente a referência para o próprio documento, conforme
+% as normas sugeridas da USP.
+\resumo{
+    Um problema latente da agricultura mundial atual é a perda da produção devido a problemas com pragas. 
+    De acordo com FAO\citep{FAO:2021}, todo ano entre 20 e 40\% da produção agrícola é perdida em função desses problemas. 
+    Na agricultura brasileira, a cultura do tomate é uma das principais fontes de emprego e renda, tendo um valor de produção bruto superior a 12,4 bilhões de reais em 2022, de acordo com dados do IBGE e uma matéria publicada no portal Revista Rural\citep{revistarural2022}. 
+    Nesse contexto, os recentes avanços na área de Visão Computacional, devido ao contínuo melhoramento das técnicas de \emph{deep learning}, tornam possível a implementação de modelos de detecção de doenças em imagens de plantas com o uso de modelos de redes neurais profundas. 
+    Entre os trabalhos produzidos, a maioria utiliza o \emph{dataset opensource PlantVillage}\citep{HughesS15}. 
+    Contudo, uma série de questões relacionadas à qualidade dos dados desse conjunto faz com que a capacidade de generalização dos modelos treinados com ele deixe muito a desejar\citep{Yao2023}. 
+    Dessa forma, fica evidente a necessidade de investir em alternativas para o desenvolvimento de conjuntos de dados abertos e robustos. 
+    Somente assim avançaremos no desenvolvimento de modelos de visão computacional aplicados à detecção de doenças em plantas, com resultados que realmente farão a diferença no dia a dia dos agricultores que se beneficiarão dessas ferramentas abertas e acessíveis. 
+    Por isso, em nosso trabalho, desenvolvemos o sistema \textit{TomatoHealth}, que permite a identificação de doenças, o armazenamento de imagens enviadas por usuários em um \textit{dataset} público, a rotulagem de imagens por meio de uma interface dedicada a usuários especialistas e o retreinamento do modelo empregado na plataforma com dados revisados.
+}
+
+\abstract{
+    A latent issue in modern global agriculture is the loss of production due to pest problems. According to the FAO \citep{FAO:2021}, every year between 20\% and 40\% of agricultural production is lost due to these issues. 
+    In Brazilian agriculture, tomato cultivation is one of the main sources of employment and income, with a gross production value exceeding 12.4 billion reais in 2022, according to IBGE data and a report published on the Revista Rural portal \citep{revistarural2022}.
+    In this context, recent advancements in the field of Computer Vision, driven by the continuous improvement of deep learning techniques, have made it possible to implement disease detection models using deep neural networks on plant images. 
+    Among the works produced, most rely on the PlantVillage open-source dataset \citep{HughesS15}. However, several issues related to the quality of the data in this dataset significantly hinder the generalization capabilities of models trained with it \citep{Yao2023}.
+    Thus, it becomes evident that investing in alternatives for developing robust and open datasets is essential. 
+    Only by doing so can we advance the development of computer vision models for plant disease detection, achieving results that genuinely make a difference in the daily lives of farmers who will benefit from these open and accessible tools.
+    Therefore, in our work, we developed the TomatoHealth system, which enables disease identification, the storage of user-submitted images in a public dataset, image labeling through a dedicated interface for expert users, and the retraining of the platform's model using reviewed data.
+}

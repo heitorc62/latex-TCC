@@ -91,11 +91,10 @@
 % Estes comandos definem o título e autoria do trabalho e devem sempre ser
 % definidos, pois além de serem utilizados para criar a capa, também são
 % armazenados nos metadados do PDF. O subtítulo é opcional.
-\title{Título do trabalho}[um subtítulo]
-\translatedtitle{Title of the document}[a subtitle]
+\title{TomatoHealth}[uma alternativa à escassez de datasets opensource de visão computacional para agricultura]
+\translatedtitle{TomatoHealth}[an alternative to the scarcity of open-source computer vision datasets for agriculture]
 
-\author[mas]{Nome Completo}
-\author[mas]{Nome Completo}
+\author[mas]{Heitor Barroso Cavalcante, Pedro Lucas R. S. Campos}
 
 \def\profa{Prof\kern.02em.\kern-.07emª\kern.07em}
 \def\dra{Dr\kern-.04em.\kern-.11emª\kern.07em}
@@ -185,7 +184,7 @@
 % esta página. A epígrafe, obviamente, é opcional; é possível colocar
 % epígrafes em todos os capítulos. O comando "\chapter*" faz esta seção
 % não ser incluída no sumário.
-\input{conteudo/resumoabstract}
+\input{conteudo2/resumoabstract}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% LISTAS DE FIGURAS ETC. %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -220,12 +219,15 @@
 \disablenewpage{\chapter*{Lista de abreviaturas}}
 
 \begin{tabular}{rl}
-   CFT & Transformada contínua de Fourier (\emph{Continuous Fourier Transform})\\
-   DFT & Transformada discreta de Fourier (\emph{Discrete Fourier Transform})\\
-  EIIP & Potencial de interação elétron-íon (\emph{Electron-Ion Interaction Potentials})\\
-  STFT & Transformada de Fourier de tempo reduzido (\emph{Short-Time Fourier Transform})\\
-  ABNT & Associação Brasileira de Normas Técnicas\\
-   URL & Localizador Uniforme de Recursos (\emph{Uniform Resource Locator})\\
+  IA & Inteligência Artificial (\emph{Artificial Intelligence})\\
+  \emph{CNN} & Rede Neural Convolucional (\emph{Convolutional Neural Network})\\
+  \emph{RoI} & Região de Interesse (\emph{Region of Interest})\\
+  \emph{IoU} & Interseção sobre União (\emph{Intersection over Union})\\
+  \emph{RGB} & Vermelho, Verde, Azul (\emph{Red, Green, Blue})\\
+  \emph{ML} & Aprendizado de Máquina (\emph{Machine Learning})\\
+  \emph{SVM} & Máquina de Vetores de Suporte (\emph{Support Vector Machine})\\
+  \emph{LLM} & Grande Modelo de Linguagem (\emph{Large Language Model})\\
+   \emph{URL} & Localizador Uniforme de Recursos (\emph{Uniform Resource Locator})\\
    IME & Instituto de Matemática e Estatística\\
    USP & Universidade de São Paulo
 \end{tabular}
@@ -234,9 +236,15 @@
 \disablenewpage{\chapter*{Lista de símbolos}}
 
 \begin{tabular}{rl}
-  $\omega$ & Frequência angular\\
-    $\psi$ & Função de análise \emph{wavelet}\\
-    $\Psi$ & Transformada de Fourier de $\psi$\\
+  $\alpha$ & Taxa de aprendizado\\
+  $\theta$ & Parâmetros do modelo\\
+  $\Delta x, \Delta y$ & Coordenadas relativas da bounding box\\
+  $\Delta w, \Delta h$ & Largura e altura relativas da bounding box\\
+  $c$ & Confiabilidade de que a grid cell contém um objeto\\
+  $p_c$ & Probabilidade de classe\\
+  $\lambda$ & Peso na função de perda\\
+  $\mathds{1}^{\text{obj}}_i$ & Função indicadora que vale 1 se a grid cell $i$ contém o centro de um objeto, 0 caso contrário\\
+  $\mathds{1}^{\text{no obj}}_i$ & Função indicadora que vale 1 se a grid cell $i$ não contém o centro de um objeto, 0 caso contrário\\
 \end{tabular}
 
 % Quebra de página manual
@@ -299,67 +307,11 @@
 \pagestyle{unnumberedchapter}
 \input{conteudo2/introducao}
 \pagestyle{mainmatter}
-\input{conteudo/01-exemplo-normas-ime}
-\input{conteudo/02-exemplo-usando-o-modelo}
-\input{conteudo/03-exemplo-latex}
-\input{conteudo/04-exemplo-tutorial}
-\input{conteudo/05-exemplo-exemplos}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% APÊNDICES E ANEXOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Um apêndice é algum conteúdo adicional de sua autoria que faz parte e
-% colabora com a ideia geral do texto mas que, por alguma razão, não precisa
-% fazer parte da sequência do discurso; por exemplo, a demonstração de um
-% teorema intermediário, as perguntas usadas em uma pesquisa qualitativa etc.
-%
-% Um anexo é um documento que não faz parte da tese (em geral, nem é de sua
-% autoria) mas é relevante para o conteúdo; por exemplo, a especificação do
-% padrão técnico ou a legislação que o trabalho discute, um artigo de jornal
-% apresentando a percepção do público sobre o tema da tese etc.
-%
-% Os comandos appendix e annex reiniciam a numeração de capítulos e passam
-% a numerá-los com letras. "annex" não faz parte de nenhuma classe padrão,
-% foi criado para este modelo. Se o trabalho não tiver apêndices ou anexos,
-% remova estas linhas.
-%
-% Diferentemente de \mainmatter, \backmatter etc., \appendix e \annex não
-% forçam o início de uma nova página. Em geral isso não é importante, pois
-% o comando seguinte costuma ser "\chapter", mas pode causar problemas com
-% a formatação dos cabeçalhos. Assim, vamos forçar uma nova página antes
-% de cada um deles.
-
-%%%% Apêndices %%%%
-
-\cleardoublepage
-
-\pagestyle{appendix}
-
-\appendix
-
-% \addappheadtotoc acrescenta a palavra "Apêndice" ao sumário; se
-% só há apêndices, sem anexos, provavelmente não é necessário.
-\addappheadtotoc
-
-\input{conteudo/apendice-exemplo-faq}
-\par
-
-%%%% Anexos %%%%
-
-\cleardoublepage
-
-\pagestyle{appendix} % repete o anterior, caso você não use apêndices
-
-\annex
-
-% \addappheadtotoc acrescenta a palavra "Anexo" ao sumário; se
-% só há anexos, sem apêndices, provavelmente não é necessário.
-\addappheadtotoc
-
-\input{conteudo/anexo-exemplo-imegoodies}
-\par
-\input{conteudo/anexo-exemplo-pseudocodigo}
-\par
+\input{conteudo2/descricao}
+\input{conteudo2/ml_projeto}
+\input{conteudo2/detalhes}
+\input{conteudo2/proximos}
+\input{conteudo2/conclusao}
 
 
 %%%%%%%%%%%%%%% SEÇÕES FINAIS (BIBLIOGRAFIA E ÍNDICE REMISSIVO) %%%%%%%%%%%%%%%%

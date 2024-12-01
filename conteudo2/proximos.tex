@@ -1,6 +1,6 @@
-\section{Próximos passos}
+\chapter{Próximos passos}
 \label{sec:próximos passos}
-\subsection{Integrando os \emph{datasets}}
+\section{Integrando os \emph{datasets}}
 \label{sec:integrando-resultados}
 Como comentado anteriormente, embora o \emph{TomatoHealth} seja um projeto que tem o objetivo de construir um conjunto de dados robusto que possibilite o treinamento de modelos confiáveis e eficientes na tarefa de detecção de doenças em folhas de plantas, acreditamos que a performance inicial do modelo oferecido pela plataforma pode ser uma variável determinante para atrair um número considerável de usuários.
 
@@ -18,7 +18,7 @@ Na figura \ref{fig:distribuicao_plantvillage}, observamos a distribuição de im
 
 Como o \emph{PlantVillage} possui uma única folha por imagem e é destinado à tarefa de classificação, a ideia para fazer essa integração é utilizar a área inteira das imagens do \emph{PlantVillage} como \emph{bounding box}.
 
-\subsection{Busca de imagens por similaridade}
+\section{Busca de imagens por similaridade}
 Como comentado anteriormente, é importante que um conjunto de dados robusto não tenha duplicatas ou ``quase-duplicatas'' em seus dados. No sistema atual, não há uma maneira de assegurar que somente imagens distintas farão parte do conjunto de dados resultante. Nesse sentido, para que os conjuntos de dados produzidos pelo \emph{TomatoHealth} não tenham dados repetidos, pensamos em um próximo passo que apresente as imagens mais semelhantes à que está sendo revisada. Assim, caso o usuário especialista interprete que ela é semelhante demais com imagens já presentes no conjunto de dados atual, será possível cancelar sua adição ao conjunto de dados atualizado.
 
 Para fazer isso, pensamos no seguinte passo a passo:
@@ -29,6 +29,6 @@ Para fazer isso, pensamos no seguinte passo a passo:
      {\bf \item Exibir as imagens mais semelhantes:} basta exibir as imagens mais semelhantes ao usuário especialista.
 \end{enumerate}
 
-\subsection{Mudança de \emph{LLM}}
+\section{Mudança de \emph{LLM}}
 
 Atualmente, como descrito no artigo, utilizamos uma chamada de \textit{API} a um modelo de linguagem (\texttt{gpt-4o-mini}) disponibilizado pela \textit{OpenAI} para gerar a resposta de diagnóstico ao usuário. No entanto, tal serviço é pago e adiciona dependências à serviços de terceiros ao projeto \emph{TomatoHealth}. Dessa forma, é interessante trabalhar para que essa funcionalidade seja incorporada de maneira mais natural ao projeto, sem implicar em custos monetários e que seja independente de terceiros. Isso pode ser feito com a adição um programa que rode um modelo de linguagem (\emph{LLM}) como um \emph{container} no ecossistema do \emph{Docker Compose}. Para isso, poderíamos utilizar a ferramenta \emph{HuggingFace Transformers}\footnote{\url{https://huggingface.co/docs/transformers/index}}, que torna simples o processo de inferência e treinamento de modelos de linguagem atuais.

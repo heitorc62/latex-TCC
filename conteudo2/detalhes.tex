@@ -1,14 +1,14 @@
-\section{{Detalhes Sobre a Implementação do Sistema}} \label{sec:implementacao_sistema}
+\chapter{Detalhes Sobre a Implementação do Sistema} \label{sec:implementacao_sistema}
 
 Nessa seção, apresentaremos detalhes técnicos sobre a implementação do sistema \textit{TomatoHealth}, tecnologias utilizadas e decisões do desenvolvimento tomadas para um sistema com as capacidades do descrito na seção \ref{sec:abst-det}.
 
-\subsection{Arquitetura cliente-servidor e contêineres \emph{Docker}}
+\section{Arquitetura cliente-servidor e contêineres \emph{Docker}}
 
 O \emph{TomatoHealth} implementa uma arquitetura de cliente-servidor, com dois tipos de clientes diferentes: clientes de usuários comuns e de especialistas, que se diferenciam conforme os requisitos das seções \ref{sec:abst-geral} e \ref{sec:abst-esp}.
 
-Do ponto de vista da arquitetura cliente-servidor e da descrição abstratas para o usuário geral, os tópicos de mais difícil implementação são: tirar, enviar e receber uma foto para análise; já que entender o papel da ferramenta é uma tarefa do \emph{front-end}. Para realizar essas tarefas difíceis, o cliente faz uma requisição POST HTTP enviando uma imagem com o uso da API FormData \footnote{\url{https://developer.mozilla.org/en-US/docs/Web/API/FormData}}. E por sua vez, o servidor salva essa imagem no banco de dados S3 MinIO, realiza a detecção das classes presentes, faz um prompt para a LLM do ChatGPT por API \footnote{\url{https://platform.openai.com/docs/api-reference/introduction}} (pergunta ao modelo como tratar um tomateiro com as doenças detectadas) e finalmente responde o POST do cliente com o output da LLM.
+Do ponto de vista da arquitetura cliente-servidor e da descrição abstratas para o usuário geral, os tópicos de mais difícil implementação são: tirar, enviar e receber uma foto para análise; já que entender o papel da ferramenta é uma tarefa do \emph{front-end}. Para realizar essas tarefas difíceis, o cliente faz uma requisição \emph{POST HTTP} enviando uma imagem com o uso da \emph{API FormData}\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/API/FormData}}. E por sua vez, o servidor salva essa imagem no banco de dados \emph{S3 MinIO}, realiza a detecção das classes presentes, faz um prompt para a \emph{LLM} \texttt{gpt-4o-mini} da \emph{OpenAI} por \emph{API}\footnote{\url{https://platform.openai.com/docs/api-reference/introduction}} (pergunta ao modelo como tratar um tomateiro com as doenças detectadas) e finalmente responde o \emph{POST} do cliente com o \emph{output} da \emph{LLM}.
 
-Já para o cliente especialista, as tarefas de ver as imagens tiradas por usuários comuns e demarcar as diferentes classes são solucionadas com a utilização da ferramenta de anotação Label Studio. Essa ferramenta já incluí uma interface de rotulagem de dados que se comunica com o banco onde essas imagens são guardadas, e ela pode ser facilmente alterada para os propósitos da nossa aplicação.
+Já para o cliente especialista, as tarefas de ver as imagens tiradas por usuários comuns e demarcar as diferentes classes são solucionadas com a utilização da ferramenta de anotação \emph{Label Studio}. Essa ferramenta já incluí uma interface de rotulagem de dados que se comunica com o banco onde essas imagens são guardadas, e ela pode ser facilmente alterada para os propósitos da nossa aplicação.
 
 Um modelo simples para nossa arquitetura pode ser visto na figura \ref{fig:modelo_arq}.
 
@@ -18,7 +18,7 @@ Um modelo simples para nossa arquitetura pode ser visto na figura \ref{fig:model
     \caption{\label{fig:modelo_arq} Modelo simples para a arquitetura implementada. A imagem apresenta as logos das tecnologias usadas: \emph{ChatGPT, Next.js, Label Studio, MinIO, PostgreSQL} e \emph{Flask}. Fonte: acervo dos autores.}
 \end{figure}
 
-Além disso, utilizamos contêineres Docker \footnote{\url{https://www.docker.com/}}, pois facilitam o processo de desenvolvimento, uma vez que lidamos com o uso de diferentes \textit{frameworks} e bancos de dados, além de utilizarmos a ferramenta \emph{Docker Compose} para o controle de inicialização, execução e comunicação entre os contêineres. A figura \ref{fig:containers} demonstra os diferentes contêineres de nossa aplicação.
+Além disso, utilizamos contêineres \emph{Docker} \footnote{\url{https://www.docker.com/}}, pois facilitam o processo de desenvolvimento, uma vez que lidamos com o uso de diferentes \textit{frameworks} e bancos de dados, além de utilizarmos a ferramenta \emph{Docker Compose} para o controle de inicialização, execução e comunicação entre os contêineres. A figura \ref{fig:containers} demonstra os diferentes contêineres de nossa aplicação.
 
 \begin{figure}[htbp]
     \centering
@@ -26,7 +26,7 @@ Além disso, utilizamos contêineres Docker \footnote{\url{https://www.docker.co
     \caption{\label{fig:containers} Modelo simples para os contêineres da nossa aplicação. A imagem apresenta as logos das tecnologias usadas: \emph{Docker, Next.js, Label Studio, MinIO, PostgreSQL} e \emph{Flask}. Fonte: acervo dos autores.}
 \end{figure}
 
-\subsection{\emph{back-end}}
+\section{\emph{back-end}}
 O \emph{back-end} do projeto foi implementado para contemplar os requisitos da seção \ref{sec:back-end-intro}. A maior parte do código foi feito utilizando \emph{Flask}\footnote{\url{https://flask.palletsprojects.com/en/stable/}}, um \emph{micro-framework Python} para aplicações web.
 
 Com essa ferramenta, implementamos os seguintes \emph{endpoints} principais (\emph{URL}s que representam funcionalidades no contexto da aplicação):
@@ -65,7 +65,7 @@ Com essa ferramenta, implementamos os seguintes \emph{endpoints} principais (\em
 \end{enumerate}
 
 
-\subsubsection{\emph{Machine Learning} no \emph{back-end} da aplicação}
+\subsection{\emph{Machine Learning} no \emph{back-end} da aplicação}
 \paragraph{Treinamento inicial:} antes de podermos iniciar a operação do sistema, seja em ambiente de desenvolvimento ou produção, um modelo de visão computacional é treinado para detectar as doenças dado uma imagem.
 
 Após esse treinamento, obtemos um arquivo com a estrutura e os valores dos pesos do modelo treinado. Então, no programa \emph{Flask} do servidor, esse arquivo é usado para instanciar um objeto de rede neural (o modelo treinado). Assim, quando uma imagem é enviada via requisição para o endpoint \texttt{/process\_image}, obtemos os resultados das doenças detectadas pelo modelo nessa imagem ao invocar o método de inferência de seu objeto e usar a imagem recebida como argumento:
@@ -109,9 +109,9 @@ Se ocorrer um erro na consulta ao modelo:
 
 \end{lstlisting}
 
-\subsection{\emph{Front-end}}
+\section{\emph{Front-end}}
 
-\subsubsection{Cliente Comum}
+\subsection{Cliente Comum}
 
 Para a interface de usuário geral, desenvolvemos duas páginas com a \textit{framework} \emph{React Next.js}, e utilizamos componentes da biblioteca \emph{React MUI}. As duas páginas são:
 
@@ -197,7 +197,7 @@ Na página de diagnóstico, como visto na figura \ref{fig:diagnostic}: o usuári
 \end{figure}
 
 
-\subsubsection{Cliente Especialista e Ferramenta de anotação \emph{Label Studio}}
+\subsection{Cliente Especialista e Ferramenta de anotação \emph{Label Studio}}
 
 Na interface do usuário especialista, utilizamos o \textit{software open-source} de rotulagem \emph{Label Studio}. Segundo sua página no \emph{Github}, "O Label Studio é uma ferramenta de rotulagem de dados de código aberto. Ela permite rotular tipos de dados como áudio, texto, imagens, vídeos e séries temporais com uma interface de usuário simples e direta e exportar para vários formatos de modelos. Ele pode ser usado para preparar dados brutos ou melhorar os dados de treinamento existentes para obter modelos de ML mais precisos".
 
