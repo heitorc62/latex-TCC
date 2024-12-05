@@ -36,7 +36,7 @@ Além disso, a inclusão desses dados ``repetidos'' pode levar a uma similaridad
 \section{Solução proposta}
 Com o levantamento dessas considerações, formulamos uma abordagem de construção colaborativa de conjuntos de dados para detecção de doenças de plantas que se propõe a ser uma possível solução para a escassez de \emph{datasets} robustos, volumosos, confiáveis e abertos nesse domínio.
 
-\subsection{Redução do Escopo}
+\subsection{Redução do escopo}
 Para o desenvolvimento dessa solução, primeiramente reduzimos o escopo das tarefas propostas por grandes \emph{datasets} desse domínio \citep{Yao2023}. Tanto o \emph{PlantDoc} (um \emph{dataset} alternativo ao \emph{PlantVillage}, que oferece imagens sem a característica de imagens de ``laboratório'') quanto o próprio \emph{PlantVillage}, por exemplo, têm em suas classes o seguinte formato:
 \begin{center}
     \texttt{(<espécie> : <condição>)}
@@ -86,7 +86,7 @@ Caso a imagem que está sendo revisada apresente um grau de semelhança elevada 
 
 Nessa seção, iremos descrever as capacidades esperadas do sistema desenvolvido sem detalhes de implementação.
 
-\subsection{{Storyboard do sistema}}
+\subsection{{\textit{Storyboard} do sistema}}
 
 Uma ótima forma de começar o desenvolvimento de um sistema é demonstrar seus casos de uso e aplicações no mundo real por meio de um \textit{Storyboard}. Uma técnica muito empregada por estúdios de animação, pois produzir desenhos para cada quadro de uma animação é uma tarefa demorada, e desenhar um quadro que não será usado é um desperdício (similar ao desenvolvimento de código). Além de ser rápido de esboçar, o \textit{Storyboard} permite demonstrar informações sobre um sistema que seria dificilmente explicado por texto, e também transmite informações essenciais de um sistema: usuários, contexto, sequência de tarefas de seu sistema e como seu sistema traz satisfação \citep{klemmer2016}. Sendo assim, a Figura \ref{fig:storyboard} demonstra o \textit{Storyboard} feito para o \emph{TomatoHealth}.
 
@@ -117,7 +117,7 @@ As próximas seções separam os componentes do sistema do \emph{TomatoHealth}, 
 
 \subsubsection{{Interface do Usuário Geral} \label{sec:abst-geral}}
 
-Nossa interface web deve permitir ao usuário geral:
+Nossa interface \textit{web} deve permitir ao usuário geral:
 
 \begin{itemize}
     \item entender o papel da ferramenta
@@ -128,7 +128,7 @@ Nossa interface web deve permitir ao usuário geral:
 
 Uma parte importante dessa interface é estimular o usuário a tirar uma foto de sua folha a partir de seu celular, para que essas imagens quando armazenadas e classificadas sirvam de dados em casos de usos reais em nosso \textit{dataset}.
 
-Com esse objetivo em mente, priorizamos o desenvolvimento \textit{Mobile-first}, e permitimos o usuário a acessar a câmera de seu celular, assim como o instruímos de como tirar uma foto adequada, tanto para um \textit{feedback} quanto um dado melhor em nosso \textit{dataset}.
+Com esse objetivo em mente, priorizamos o desenvolvimento \textit{mobile-first}, e permitimos o usuário a acessar a câmera de seu celular, assim como o instruímos de como tirar uma foto adequada, tanto para um \textit{feedback} quanto um dado melhor em nosso \textit{dataset}.
 
 \subsubsection{{Interface do Usuário Especialista} \label{sec:abst-esp}}
 
@@ -142,9 +142,9 @@ Na interface do usuário especialista, ele deve ser capaz de:
 
 Com isso, as imagens ficam com suas classes demarcadas por um quadrado, e inseridas em nosso banco de dados, para retreinamento do nosso modelo. 
 
-\subsubsection{{\emph{back-end}}\label{sec:back-end-intro}}
+\subsubsection{{\emph{Back-end}}\label{sec:back-end-intro}}
 
-Nosso \emph{Back-end} deve comportar:
+Nosso \emph{back-end} deve comportar:
 
 \begin{itemize}
     \item a criação de usuários especialistas

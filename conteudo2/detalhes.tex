@@ -1,4 +1,4 @@
-\chapter{Detalhes Sobre a Implementação do Sistema} \label{sec:implementacao_sistema}
+\chapter{Detalhes sobre a implementação do sistema} \label{sec:implementacao_sistema}
 
 Nessa seção, apresentaremos detalhes técnicos sobre a implementação do sistema \textit{TomatoHealth}, tecnologias utilizadas e decisões do desenvolvimento tomadas para um sistema com as capacidades do descrito na seção \ref{sec:abst-det}.
 
@@ -15,7 +15,7 @@ Um modelo simples para nossa arquitetura pode ser visto na figura \ref{fig:model
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1\linewidth]{images/modelo.png}
-    \caption{\label{fig:modelo_arq} Modelo simples para a arquitetura implementada. A imagem apresenta as logos das tecnologias usadas: \emph{ChatGPT, Next.js, Label Studio, MinIO, PostgreSQL} e \emph{Flask}. Fonte: acervo dos autores.}
+    \caption{\label{fig:modelo_arq} Modelo simples para a arquitetura implementada. A imagem apresenta as logos das tecnologias usadas: ChatGPT, Next.js, Label Studio, MinIO, PostgreSQL e Flask. Fonte: acervo dos autores.}
 \end{figure}
 
 Além disso, utilizamos contêineres \emph{Docker} \footnote{\url{https://www.docker.com/}}, pois facilitam o processo de desenvolvimento, uma vez que lidamos com o uso de diferentes \textit{frameworks} e bancos de dados, além de utilizarmos a ferramenta \emph{Docker Compose} para o controle de inicialização, execução e comunicação entre os contêineres. A figura \ref{fig:containers} demonstra os diferentes contêineres de nossa aplicação.
@@ -23,11 +23,11 @@ Além disso, utilizamos contêineres \emph{Docker} \footnote{\url{https://www.do
 \begin{figure}[htbp]
     \centering
     \includegraphics[height=0.5\textheight]{images/containers.png}
-    \caption{\label{fig:containers} Modelo simples para os contêineres da nossa aplicação. A imagem apresenta as logos das tecnologias usadas: \emph{Docker, Next.js, Label Studio, MinIO, PostgreSQL} e \emph{Flask}. Fonte: acervo dos autores.}
+    \caption{\label{fig:containers} Modelo simples para os contêineres da nossa aplicação. A imagem apresenta as logos das tecnologias usadas: Docker, Next.js, Label Studio, MinIO, PostgreSQL e Flask. Fonte: acervo dos autores.}
 \end{figure}
 
-\section{\emph{back-end}}
-O \emph{back-end} do projeto foi implementado para contemplar os requisitos da seção \ref{sec:back-end-intro}. A maior parte do código foi feito utilizando \emph{Flask}\footnote{\url{https://flask.palletsprojects.com/en/stable/}}, um \emph{micro-framework Python} para aplicações web.
+\section{\emph{Back-end}}
+O \emph{back-end} do projeto foi implementado para contemplar os requisitos da seção \ref{sec:back-end-intro}. A maior parte do código foi feito utilizando \emph{Flask}\footnote{\url{https://flask.palletsprojects.com/en/stable/}}, um \emph{micro-framework Python} para aplicações \textit{web}.
 
 Com essa ferramenta, implementamos os seguintes \emph{endpoints} principais (\emph{URL}s que representam funcionalidades no contexto da aplicação):
 \begin{enumerate}
@@ -47,7 +47,7 @@ Com essa ferramenta, implementamos os seguintes \emph{endpoints} principais (\em
         \item Envia a resposta à requisição;
     \end{enumerate}
     \item \texttt{/register\_admin}:
-    Além do programa em \emph{Flask}, uma parte importante do \emph{back-end} da aplicação \emph{TomatoHealth} é um programa de linha de comando que oferece uma maneria simplificada dos administradores do sistema interagirem com ele. Com isso, é possível criar uma conta de administrador (que será registrada no banco de dados \emph{PostgreSQL}\footnote{\url{https://www.postgresql.org/}}. Com essa conta, temos acesso à todas as funcionalidades oferecidas pelo sistema, que serão explicadas a seguir.
+    Além do programa em \emph{Flask}, uma parte importante do \emph{back-end} da aplicação \emph{TomatoHealth} é um programa de linha de comando que oferece uma maneria simplificada dos administradores do sistema interagirem com ele. Com isso, é possível criar uma conta de administrador (que será registrada no banco de dados \emph{PostgreSQL}\footnote{\url{https://www.postgresql.org/}}. Com essa conta, temos acesso a todas as funcionalidades oferecidas pelo sistema, que serão explicadas a seguir.
     \item \texttt{/admin\_login}
     Depois de registrado um administrador, precisamos fazer \emph{login} na plataforma para receber um \emph{token} de autenticação \emph{JWT}. Isso é necessário pois as operações sensíveis, são protegidas.
     \item \texttt{/invite\_reviewer}
@@ -111,7 +111,7 @@ Se ocorrer um erro na consulta ao modelo:
 
 \section{\emph{Front-end}}
 
-\subsection{Cliente Comum}
+\subsection{Cliente comum}
 
 Para a interface de usuário geral, desenvolvemos duas páginas com a \textit{framework} \emph{React Next.js}, e utilizamos componentes da biblioteca \emph{React MUI}. As duas páginas são:
 
@@ -144,7 +144,8 @@ Na primeira página, dividimos o site nas seguintes seções, como vistas na fig
         \includegraphics[width=\linewidth, height=0.4\textheight, keepaspectratio]{images/homepage4.png}
     \end{subfigure}
     
-    \caption{Página inicial do \emph{TomatoHealth}. Fonte da imagem utilizada: OpenAI, (2024), imagem gerada pelo modelo ChatGPT.}        \label{fig:homepage}
+    \caption{Página inicial do TomatoHealth. Fonte da imagem utilizada: OpenAI, (2024), imagem gerada pelo modelo ChatGPT.}
+    \label{fig:homepage}
 
 \end{figure}
 
@@ -192,12 +193,12 @@ Na página de diagnóstico, como visto na figura \ref{fig:diagnostic}: o usuári
         \includegraphics[width=\linewidth, height=0.4\textheight, keepaspectratio]{images/diagnostic6.png}
     \end{subfigure}
     
-    \caption{Página de diagnóstico do \emph{TomatoHealth}. Fonte da imagem utilizada: OpenAI, (2024), imagem gerada pelo modelo ChatGPT.}        
+    \caption{Página de diagnóstico do TomatoHealth. Fonte da imagem utilizada: OpenAI, (2024), imagem gerada pelo modelo ChatGPT.}        
     \label{fig:diagnostic}
 \end{figure}
 
 
-\subsection{Cliente Especialista e Ferramenta de anotação \emph{Label Studio}}
+\subsection{Cliente especialista e ferramenta de anotação \emph{Label Studio}}
 
 Na interface do usuário especialista, utilizamos o \textit{software open-source} de rotulagem \emph{Label Studio}. Segundo sua página no \emph{Github}, "O Label Studio é uma ferramenta de rotulagem de dados de código aberto. Ela permite rotular tipos de dados como áudio, texto, imagens, vídeos e séries temporais com uma interface de usuário simples e direta e exportar para vários formatos de modelos. Ele pode ser usado para preparar dados brutos ou melhorar os dados de treinamento existentes para obter modelos de ML mais precisos".
 
@@ -208,5 +209,5 @@ Conforme a figura \ref{fig:rotulagem_labelstudio}, o usuário especialista vê, 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1\linewidth]{images/rotulagem_labelstudio.jpg}
-    \caption{\label{fig:rotulagem_labelstudio} Página de rotulagem do usuário especialista utilizando uma versão modificada do \emph{Label Studio}. Fonte: acervo dos autores.}
+    \caption{\label{fig:rotulagem_labelstudio} Página de rotulagem do usuário especialista utilizando uma versão modificada do Label Studio. Fonte: acervo dos autores.}
 \end{figure}

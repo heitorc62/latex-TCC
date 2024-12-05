@@ -29,12 +29,12 @@ Considerando o fato do \emph{PlantDoc} ter sido construído após a constataçã
 Para performar essa tarefa de detecção de objetos, escolhemos a família de modelos \emph{YOLO}, que explicaremos em detalhes na seção \ref{sec:modelo}
 
 \section{Entendendo detecção de objetos em \emph{Machine Learning}}
-A detecção de objetos tem o objetivo de resolver uma das questões fundamentais de aplicações de visão computacional. Identificar o que são os objetos e onde eles estão localizados nas imagens. Isso é feito por meio da detecção de instâncias de objetos pertencentes à classes específicas nas imagens em questão, com o uso de \emph{bounding boxes} --- retângulos que envolvem os objetos detectados e indicam sua classe \citep{Zou2019Object}.
+A detecção de objetos tem o objetivo de resolver uma das questões fundamentais de aplicações de visão computacional. Identificar o que são os objetos e onde eles estão localizados nas imagens. Isso é feito por meio da detecção de instâncias de objetos pertencentes a classes específicas nas imagens em questão, com o uso de \emph{bounding boxes} --- retângulos que envolvem os objetos detectados e indicam sua classe \citep{Zou2019Object}.
 
 \begin{figure}[htb!]
     \centering
     \includegraphics[width=0.8\linewidth]{images/bounding_boxes.png}
-    \caption{\label{fig:bounding_boxes} Exemplo de detecção de objetos em uma imagem utilizando \emph{bounding boxes}. Imagem extraída de \citeauthor{MTheiler}, trabalho próprio, licenciada sob CC BY-SA 4.0. Disponível em: \url{https://commons.wikimedia.org/w/index.php?curid=75843378}.}
+    \caption{\label{fig:bounding_boxes} Exemplo de detecção de objetos em uma imagem utilizando bounding boxes. Imagem extraída de \citeauthor{MTheiler}, trabalho próprio, licenciada sob CC BY-SA 4.0. Disponível em: \url{https://commons.wikimedia.org/w/index.php?curid=75843378}.}
 \end{figure}
 
 A tarefa de detectar objetos em imagens não é nova, e por ter muitas aplicações como detecção de faces e corpos humanos e servir como base para outras tarefas como direção autônoma, \emph{image captioning} --- que corresponde à tarefa de descrever imagens com textos de linguagem natural ---, aplicações em sistemas com câmeras de segurança, etc. Há uma evolução rápida nesse campo da ciência desde os anos 1990 \citep{Zou2019Object, Zhao2018Object}. Podemos observar essa evolução ao considerarmos o crescimento exponencial no número de publicações que vêm ocorrendo nessa área de conhecimento:
@@ -115,7 +115,7 @@ O funcionamento da arquitetura \emph{YOLO} segue o seguinte passo a passo:
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{images/grid_cells.png}
-    \caption{\label{fig:grid_cells} Figura que ilustra a as \emph{grid cells} do \emph{YOLOv1} em uma imagem. Imagem extraída de \cite{yolo}.}
+    \caption{\label{fig:grid_cells} Figura que ilustra a as grid cells do YOLOv1 em uma imagem. Imagem extraída de \cite{yolo}.}
 \end{figure}
 
 Para treinar o modelo \emph{YOLOv1}, considere o seguinte rótulo de \emph{bounding box}:$(x, y, w, h)$; onde $(x,y)$ corresponde ao centro da \emph{bounding box} e $w$ e $h$ à sua largura e altura, respectivamente. Perceba que no rótulo, os valores de $x, y, w$ e $h$ são valores absolutos relativos aos \emph{pixels} da imagem inteira. Contudo, a previsão do modelo e, portanto, os valores alvo são relativos à \emph{grid cell} em que o centro da \emph{bounding box} está localizado. Dessa forma, uma importante etapa de pre-processamento dos dados que passam pela arquitetura do \emph{YOLOv1} é a normalização desses valores para que sejam relativos à \emph{grid cell}. Isso é feito da seguinte maneira:
@@ -148,7 +148,7 @@ y_i =
 \end{equation}
 onde $i$ representa o índice da classe atual, e $k$ é o índice da classe alvo para o objeto em questão. Ou seja, o vetor resultante do \emph{one-hot encoding} possui valor 1 apenas na posição da classe do objeto e 0 nas demais posições.
 
-Sobre os conceitos envolvidos com as \emph{grid cells} do \emph{YOLOv1}, resta explicar que, cada \emph{grid cell} terá um número $B$ de \emph{bounding boxes} candidatas à englobarem o objeto cujo centro está dentro de seus limites. No artigo original, $B = 2$. Assim, a \emph{bounding box} que tiver o maior valor de confiança de que contém um objeto será a escolhida como \emph{bounding box} para essa \emph{grid cell}.
+Sobre os conceitos envolvidos com as \emph{grid cells} do \emph{YOLOv1}, resta explicar que, cada \emph{grid cell} terá um número $B$ de \emph{bounding boxes} candidatas a englobarem o objeto cujo centro está dentro de seus limites. No artigo original, $B = 2$. Assim, a \emph{bounding box} que tiver o maior valor de confiança de que contém um objeto será a escolhida como \emph{bounding box} para essa \emph{grid cell}.
 
 Para continuar o entendimento dos passos envolvidos na detecção de objetos do \emph{YOLOv1}, precisamos saber como é o resultado da tarefa de detecção de objetos sobre uma imagem. Desse modo, após o \emph{forward pass}, temos o seguinte vetor de predição:
 
@@ -218,7 +218,7 @@ O treinamento do modelo \emph{YOLOv1} geralmente começa com uma rede neural pr�
 \begin{figure}[htb!]
     \centering
     \includegraphics[width=0.8\linewidth]{images/yolo_train.png}
-    \caption{\label{fig:yolo_train} Ilustração do processo de treinamento do \emph{YOLOv1}. Disponível em: \url{https://www.youtube.com/watch?v=zgbPj4lSc58&list=PL1u-h-YIOL0sZJsku-vq7cUGbqDEeDK0a&index=1&t=1517s}.}
+    \caption{\label{fig:yolo_train} Ilustração do processo de treinamento do YOLOv1. Disponível em: \url{https://www.youtube.com/watch?v=zgbPj4lSc58&list=PL1u-h-YIOL0sZJsku-vq7cUGbqDEeDK0a&index=1&t=1517s}.}
 \end{figure}
 
 Escolhemos uma imagem aleatória do conjunto de dados, efetuamos o pré-processamento de seus rótulos como comentado, passamos a imagem pela rede neural, computamos a função de perda ao comparar os resultados do \emph{forward pass} com os rótulos processados e então efetuamos o processo de \emph{back propagation}, atualizando os pesos do modelo com base no gradiente da função de perda. 
@@ -285,7 +285,7 @@ L_{i, \text{no\_obj}} = \sum_{j=1}^{B} (c_{i,j} - \hat{c}_{i,j})^2
 Em que o valor de $\hat{c}_{i,j}$ é 0 e $B$ igual a 2.
 
 \paragraph{Limitações}
-Apesar de ser uma arquitetura disruptiva que revolucionou o cenário da visão computacional e detecção de objetos, o \emph{YOLOv1} apresentava algumas limitações. Principalmente a incapacidade de detectar muitos objetos, principalmente quando os objetos são pequenos e estão amontoados. (limitação devido às \emph{grid cells}). Além disso, como todas as \emph{bounding boxes} têm sua origem em um processo adaptativo relativo às \emph{grid cells}, o \emph{YOLOv1} tem dificuldade em adaptar as caixas à objetos com proporções variadas \citep{yolo_review}.
+Apesar de ser uma arquitetura disruptiva que revolucionou o cenário da visão computacional e detecção de objetos, o \emph{YOLOv1} apresentava algumas limitações. Principalmente a incapacidade de detectar muitos objetos, principalmente quando os objetos são pequenos e estão amontoados. (limitação devido às \emph{grid cells}). Além disso, como todas as \emph{bounding boxes} têm sua origem em um processo adaptativo relativo às \emph{grid cells}, o \emph{YOLOv1} tem dificuldade em adaptar as caixas a objetos com proporções variadas \citep{yolo_review}.
 
 \subsection{Métricas}
 Para avaliar diferentes modelos de detecção de objetos, temos diversas métricas para quantificar a qualidade do modelo em identificar corretamente objetos em uma imagem. Vamos detalhar as métricas mais comuns, com base nas definições matemáticas do artigo \citep{Padilla2020A}.
@@ -331,7 +331,7 @@ Para avaliar diferentes modelos de detecção de objetos, temos diversas métric
     \begin{figure}[htb!]
         \centering
         \includegraphics[width=0.8\linewidth]{images/ap.png}
-        \caption{\label{fig:average_precision_curve} Exemplo de curva de precisão-\emph{recall} usando interpolação em todos os pontos para o cálculo da \emph{Average Precision (AP)}. Disponível em: \url{https://manalelaidouni.github.io/assets/img/pexels/all_point_interpolated_AP_(2)-848db820-1379-456f-bad8-8e45ea562fd0.png}.}
+        \caption{\label{fig:average_precision_curve} Exemplo de curva de precisão-recall usando interpolação em todos os pontos para o cálculo da Average Precision (AP). Disponível em: \url{https://manalelaidouni.github.io/assets/img/pexels/all_point_interpolated_AP_(2)-848db820-1379-456f-bad8-8e45ea562fd0.png}.}
     \end{figure}
     
     \item {\bf \emph{Mean Average Precision (mAP)}:}
@@ -354,7 +354,7 @@ utilizadas. Nesse contexto, se destacam o {\bf backbone}, {\bf neck} e {\bf head
 \begin{figure}[htb!]
     \centering
     \includegraphics[width=0.8\linewidth]{images/backbone-neck-head.png}
-    \caption{\label{fig:backbone_neck_head} Estrutura de detecção de objetos mostrando a separação entre \emph{Backbone}, \emph{Neck} e \emph{Head}. Disponível em: \url{https://velog.io/@peterkim/Object-Detection에서-말하는-Backbone-Neck-Head}.}
+    \caption{\label{fig:backbone_neck_head} Estrutura de detecção de objetos mostrando a separação entre Backbone, Neck e Head. Disponível em: \url{https://velog.io/@peterkim/Object-Detection에서-말하는-Backbone-Neck-Head}.}
 \end{figure}
 
 \begin{itemize}
@@ -384,7 +384,7 @@ O \emph{YOLOv8}, desenvolvido pela \emph{Ultralytics} e lançado em janeiro de 2
 \begin{figure}[htb!]
     \centering
     \includegraphics[width=0.8\linewidth]{images/yolov8.jpg}
-    \caption{\label{fig:yolov8_issue189} Figura que ilustra a arquitetura do \emph{YOLOv8}. Imagem extraída de \citeauthor{ultralytics_issue_189}. Disponível em: \url{https://github.com/ultralytics/ultralytics/issues/189}.}
+    \caption{\label{fig:yolov8_issue189} Figura que ilustra a arquitetura do YOLOv8. Imagem extraída de \citeauthor{ultralytics_issue_189}. Disponível em: \url{https://github.com/ultralytics/ultralytics/issues/189}.}
 \end{figure}
 
 Essas inovações resultaram em um desempenho superior do \emph{YOLOv8} em comparação com suas versões anteriores. Em testes realizados no conjunto de dados COCO, o \emph{YOLOv8} demonstrou um aumento no \emph{Mean Average Precision} (mAP) e uma velocidade de inferência mais rápida \citep{ultralytics_yolov8_results}.
@@ -449,7 +449,7 @@ Ao final de todo esse processamento, restaram as seguintes classes no \emph{data
 \begin{figure}[htb!]
     \centering
     \includegraphics[width=1\linewidth]{images/distribuicao_anotacoes.png}
-    \caption{\label{fig:distribuicao-ann-cls} Gráfico de barras mostrando a distribuição de anotações por classe após o processamento do conjunto de dados \emph{PlantDoc}. Fonte: acervo dos autores.}
+    \caption{\label{fig:distribuicao-ann-cls} Gráfico de barras mostrando a distribuição de anotações por classe após o processamento do conjunto de dados PlantDoc. Fonte: acervo dos autores.}
 \end{figure}
 
 Totalizando 721 imagens, 2840 anotações e uma média de 3.93897 anotações por imagem. Na figura \ref{fig:distribuicao-ann-cls} é possível enxergar a distribuição de anotações por classes. É notável que a classe \emph{Tomato two spotted spider mites leaf} possui um número muito pequeno de exemplos. Contudo, como o intuito do projeto é, justamente estender o atual conjunto de dados com novas imagens e novas anotações, decidimos não desconsiderar essa classe e mantê-la no conjunto de dados.
