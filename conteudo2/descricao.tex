@@ -9,9 +9,9 @@ Para que um conjunto de dados com essa potencialidade seja desenvolvido, é prec
 
 No contexto de \emph{deep learning}, modelos de visão computacional já se provaram muito efetivos. Contudo, é consenso que grandes quantidades de dados são necessárias para evitar \emph{overfitting}.
 
-A ideia geral de sistemas supervisionados de \emph{machine learning}, é que, utilizando de algoritmos de otimização de uma função de perda --- que quantifica a performance do modelo atual --- os modelos em treinamento aprendam a reproduzir a função representada pelo conjunto de dados. Em que os dados de entrada são as variáveis independentes (no caso, imagens) e os rótulos são as variáveis dependentes \citep{Yaser:2012}. 
+A ideia geral de sistemas supervisionados de \emph{machine learning}, é que, utilizando de algoritmos de otimização de uma função de perda --- que quantifica a performance do modelo atual --- os modelos em treinamento aprendam a reproduzir a função representada pelo conjunto de dados, em que os dados de entrada são as variáveis independentes (no caso, imagens) e os rótulos são as variáveis dependentes \citep{Yaser:2012}. 
 
-Nesse caso, quando não temos uma grande quantidade de dados, os modelos de aprendizado profundo (\emph{deeplearning}) têm a capacidade de aprender uma função que reproduz perfeitamente o conjunto de treinamento, é como se o modelo ``decorasse'' os dados ao invés de relacionar características importantes neles para chegar a respostas pertinentes \citep{Yaser:2012, Shorten2019A}. 
+Nesse caso, quando não temos uma grande quantidade de dados, os modelos de aprendizado profundo (\emph{deep learning}) têm a capacidade de aprender uma função que reproduz perfeitamente o conjunto de treinamento, é como se o modelo ``decorasse'' os dados ao invés de relacionar características importantes neles para chegar a respostas pertinentes \citep{Yaser:2012, Shorten2019A}. 
 
 Por isso, esses sistemas necessitam de grandes quantidades de dados para funcionarem de maneira satisfatória \citep{Shorten2019A}. Então, para construir um conjunto de dados de qualidade para detecção de doenças em folhas de plantas, é importante que ele tenha um volume considerável.
 
@@ -72,7 +72,7 @@ Note que a consideração
     {\bf \item Não deve haver duplicatas ou ``quase-duplicatas'' nos dados}
 \end{enumerate}
 
-Não foi abordada por essa primeira versão de implementação do \emph{TomatoHealth}. Contudo, já planejamos a integração de algoritmos que façam busca por imagens semelhantes no conjunto de dados existente e as exiba para o especialista que está fazendo a revisão.
+não foi abordada por essa primeira versão de implementação do \emph{TomatoHealth}. Contudo, já planejamos a integração de algoritmos que façam busca por imagens semelhantes no conjunto de dados existente e as exiba para o especialista que está fazendo a revisão.
 
 \begin{figure}
     \centering
@@ -80,11 +80,11 @@ Não foi abordada por essa primeira versão de implementação do \emph{TomatoHe
     \caption{\label{fig:similaridade}Exemplos de resultados do algoritmo de busca por imagens com base em similaridade. (extraído de \url{https://huggingface.co/blog/image-similarity}).}
 \end{figure}
 
-Caso a imagem que está sendo revisada apresente um grau de semelhança elevada com outras imagens que já fazem parte do conjunto de dados, o especialista terá a opção de descartar a amostra em questão. Essa funcionalidade, que fará com que a solução proposta contemple todas as considerações feitas no trabalho será melhor descrita na seção ~\ref{sec:próximos passos}.
+Caso a imagem que está sendo revisada apresente um grau de semelhança elevada com outras imagens que já fazem parte do conjunto de dados, o especialista terá a opção de descartar a amostra em questão. Essa funcionalidade, que fará com que a solução proposta contemple todas as considerações feitas no trabalho será melhor descrita no capítulo \ref{sec:próximos passos}.
 
 \section{{Detalhes ``abstratos'' sobre o sistema} \label{sec:abst-det}}
 
-Nessa seção, iremos descrever as capacidades esperadas do sistema desenvolvido sem detalhes de implementação.
+Nesse capítulo, iremos descrever as capacidades esperadas do sistema desenvolvido sem detalhes de implementação.
 
 \subsection{{\textit{Storyboard} do sistema}}
 
@@ -113,7 +113,7 @@ Na Figura \ref{fig:storyboard}, enumeramos as ações dos quadrinhos:
 
 Já tendo uma breve noção sobre a atuação do \emph{TomatoHealth} por nosso \textit{Storyboard}, também é importante descrever o sistema de maneira geral, para comentar sua pertinência aos assuntos tratados nesse trabalho, e destacar como ele se relaciona ao problema.
 
-As próximas seções separam os componentes do sistema do \emph{TomatoHealth}, para que a Seção \ref{sec:implementacao_sistema} os detalhe de maneira técnica.
+Os próximos capítulos separam os componentes do sistema do \emph{TomatoHealth}, para que o capítulo \ref{sec:implementacao_sistema} os detalhe de maneira técnica.
 
 \subsubsection{{Interface do Usuário Geral} \label{sec:abst-geral}}
 
@@ -128,7 +128,7 @@ Nossa interface \textit{web} deve permitir ao usuário geral:
 
 Uma parte importante dessa interface é estimular o usuário a tirar uma foto de sua folha a partir de seu celular, para que essas imagens quando armazenadas e classificadas sirvam de dados em casos de usos reais em nosso \textit{dataset}.
 
-Com esse objetivo em mente, priorizamos o desenvolvimento \textit{mobile-first}, e permitimos o usuário a acessar a câmera de seu celular, assim como o instruímos de como tirar uma foto adequada, tanto para um \textit{feedback} quanto um dado melhor em nosso \textit{dataset}.
+Com esse objetivo em mente, priorizamos o desenvolvimento \textit{mobile-first}, e permitimos o usuário a acessar a câmera de seu celular, assim como o instruímos sobre como tirar uma foto adequada, tanto para um \textit{feedback} quanto um dado melhor em nosso \textit{dataset}.
 
 \subsubsection{{Interface do Usuário Especialista} \label{sec:abst-esp}}
 
@@ -150,7 +150,7 @@ Nosso \emph{back-end} deve comportar:
     \item a criação de usuários especialistas
     \item um banco de dados com as imagens enviadas por usuários comuns e as imagens a serem usadas no modelo de detecção
     \item o treinamento do modelo
-    \item um servidor que recebe uma imagem, realiza a detecção, e faz uma chamada para uma \emph{LLM} recomendar cuidados a serem feitos com o tomateiro de acordo com as classes detectadas
+    \item um servidor que recebe uma imagem, realiza a detecção, e faz uma chamada para um \emph{Large-Scale Transformer-based Language Model} recomendar cuidados a serem feitos com o tomateiro de acordo com as classes detectadas
     \item a inserção de imagens enviadas por usuários comuns e de imagens anotadas por especialistas no banco de dados
 \end{itemize}
 

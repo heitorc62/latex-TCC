@@ -26,7 +26,7 @@ Desse modo, é mais interessante trabalharmos com a tarefa de detecção, em que
 
 Considerando o fato do \emph{PlantDoc} ter sido construído após a constatação de que haviam problemas profundos com o \emph{PlantVillage} e ter proposto essas melhorias para tentar se consolidar como um novo padrão de \emph{dataset} público para essa tarefa, decidimos escolhê-lo para ser o \emph{dataset} de base para o modelo de visão computacional do \emph{TomatoHealth}.
 
-Para performar essa tarefa de detecção de objetos, escolhemos a família de modelos \emph{YOLO}, que explicaremos em detalhes na seção \ref{sec:modelo}
+Para performar essa tarefa de detecção de objetos, escolhemos a família de modelos \emph{YOLO}, que explicaremos em detalhes no capítulo \ref{sec:modelo}
 
 \section{Entendendo detecção de objetos em \emph{Machine Learning}}
 A detecção de objetos tem o objetivo de resolver uma das questões fundamentais de aplicações de visão computacional. Identificar o que são os objetos e onde eles estão localizados nas imagens. Isso é feito por meio da detecção de instâncias de objetos pertencentes a classes específicas nas imagens em questão, com o uso de \emph{bounding boxes} --- retângulos que envolvem os objetos detectados e indicam sua classe \citep{Zou2019Object}.
@@ -49,7 +49,7 @@ O motivo da aceleração significativa na produção de conhecimento científico
 \subsection{Detecção de objetos com uma abordagem tradicional}
 Antes do advento das técnicas de \emph{deep learning}, os métodos para detecção de objetos em imagens dependiam da extração manual de representações (características) eficazes para a inferência esperada. Os algoritmos mais eminentes dessa época utilizavam janelas deslizantes na imagem com filtros compostos pelas características extraídas manualmente. 
 
-Por exemplo, no algorítimo de Viola-Jones, a imagem é percorrida por janelas deslizantes de diversas escalas contendo características presentes em rostos humanos (Haar \emph{features}). Dessa forma, a depender da correspondência das características com a imagem, uma face poderia ser acusada como detectada ou não naquela localidade, isso é feito com classificadores em cascata \citep{Viola}.
+Por exemplo, no algoritmo de Viola-Jones, a imagem é percorrida por janelas deslizantes de diversas escalas contendo características presentes em rostos humanos (Haar \emph{features}). Dessa forma, a depender da correspondência das características com a imagem, uma face poderia ser acusada como detectada ou não naquela localidade, isso é feito com classificadores em cascata \citep{Viola}.
 
 Por outro lado, o método \emph{HOG (Histogram of Oriented Gradients)} é um método em que as caraterísticas da imagem são obtidas por meio da computação de gradientes em pequenas porções da imagem. Para cada pequena localidade, o histograma resultante era concatenado aos demais, formando um mapa de características representativo de bordas e texturas. Com a aplicação desse mapa de características em classificadores como \emph{SVMs} (\emph{Support Vector Machines} \citep{Cortes1995Support-Vector}), é possível detectar objetos e essa combinação foi inicialmente implementada para detecção de faces \citep{HOG}.
 
@@ -71,12 +71,12 @@ As redes neurais convolucionais são uma evolução das redes neurais convencion
 
 \paragraph{Camadas de \emph{pooling}} são camadas utilizadas para redimensionar os dados de entrada. Tanto aqui quanto em relação às camadas convolucionais, podemos pensar que os dados de entrada são imagens. Geralmente, as camadas de \emph{pooling} não apresentam parâmetros aprendíveis pela rede (treináveis). A técnica mais utilizada é a denominada \emph{max-pooling}, em que a camada visa preservar o sinal privilegiado pela camada convolucional anterior.
 
-\paragraph{Camadas \emph{fully connected}} são camadas semelhantes às presentes nas redes neurais originais. Geralmente são utilizadas para relacionar --- de maneira treinável --- os resultados das camadas abordadas anteriormente. Constituem camadas que utilizam as características extraídas pelas camadas convolucionais e de \emph{pooling}, para efetuar a classificação. Isso, no caso de um problema de classificação, evidentemente.
+\paragraph{Camadas \emph{fully connected}} são camadas semelhantes às presentes nas redes neurais convencionais. Geralmente são utilizadas para relacionar --- de maneira treinável --- os resultados das camadas abordadas anteriormente. Constituem camadas que utilizam as características extraídas pelas camadas convolucionais e de \emph{pooling}, para efetuar a classificação. Isso, no caso de um problema de classificação, evidentemente.
 
 \subsubsection{Principais modelos para detecção de objetos com \emph{deep learning}}
-Com o avanço do \emph{deep learing} e das redes convolucionais, esses novos conceitos foram introduzidos ao contexto de detecção de objetos com a introdução de \emph{Regions with CNN features} (\emph{RCNNs}) \citep{Zou2019Object, rcnn1, rcnn2}.
+Com o avanço do \emph{deep learning} e das redes convolucionais, esses novos conceitos foram introduzidos ao contexto de detecção de objetos com a introdução de \emph{Regions with CNN features} (\emph{RCNNs}) \citep{Zou2019Object, rcnn1, rcnn2}.
 
-A ideia por trás do conceito de \emph{RCNN} é bem direta. Primeiro um conjunto de regiões na imagem é obtido por meio de algoritmos de busca. Depois disso, as representações de cada região é obtida ao passá-las (adaptadas para um tamanho fixo) por uma rede convolucional. Por fim, classificadores como \emph{SVMs} \citep{Zou2019Object}.
+A ideia por trás do conceito de \emph{RCNN} é bem direta. Primeiro um conjunto de regiões na imagem é obtido por meio de algoritmos de busca. Depois disso, as representações de cada região é obtida ao passá-las (adaptadas para um tamanho fixo) por uma rede convolucional. Por fim, classificadores como \emph{SVMs} são utilizados para categorizar essas regiões em diferentes classes \citep{Zou2019Object}.
 
 Ao longo do tempo, esforços foram sendo feitos para aumentar a velocidade da detecção de objetos com \emph{CNNs}. A abordagem de \cite{SPPNet} utiliza o conceito de \emph{spatial pyramidal pooling}, com esse conceito, as regiões de interesse (\emph{RoI}) são obtidas diretamente no mapa de \emph{features}, o que aumenta muito a velocidade de todo o processo.
 
@@ -165,7 +165,7 @@ $$
 \right]^B_{i=1}
 $$
 
-Corresponde às coordenadas das \emph{bounding boxes} preditas pela \emph{grid cell} em questão e $\hat{c}$ a confiança de que, nessa \emph{grid cell} o centro de um objeto esteja localizado.
+corresponde às coordenadas das \emph{bounding boxes} preditas pela \emph{grid cell} em questão e $\hat{c}$ a confiança de que, nessa \emph{grid cell} o centro de um objeto esteja localizado.
 
 Além disso, 
 
@@ -179,7 +179,7 @@ São os valores das probabilidades preditas para cada classe, no modelo proposto
 
 Assim, para cada \emph{grid} cell, temos um vetor de tamanho $1 \times 30$ de resultado. Como são $7 \times 7$ \emph{grid cells} em uma imagem, temos de resultado de um \emph{forward pass} um vetor de tamanho $7 \times 7 \times 30$.
 
-Nesse ponto, perceba que, para obtermos as coordenadas e as dimensões das \emph{bounding boxes}, precisamos passar pelo seguinte processo (estamos revertendo a normalização feita no inicio do \emph{forwar pass}):
+Nesse ponto, perceba que, para obtermos as coordenadas e as dimensões das \emph{bounding boxes}, precisamos passar pelo seguinte processo (estamos revertendo a normalização feita no início do \emph{forward pass}):
 
 $$
 \begin{cases}
@@ -456,7 +456,7 @@ Totalizando 721 imagens, 2840 anotações e uma média de 3.93897 anotações po
 
 \subsection{Treinamento}
 \label{sec:treinamento2}
-Após o pré-processamento, o conjunto de dados foi adequadamente estruturado para ser utilizado pelo \emph{YOLO}. Com isso, o próximo passo foi realizar o treinamento do modelo. Executamos um processo de ajuste fino (\emph{fine-tuning}) do \emph{YOLOv8n} (uma versão mais leve do \emph{YOLOv8}), previamente treinado no \emph{dataset} COCO\footnote{\url{https://yolov8.org/yolov8-coco-dataset/}} \cite{COCO}.
+Após o pré-processamento, o conjunto de dados foi adequadamente estruturado para ser utilizado pelo \emph{YOLO}. Com isso, o próximo passo foi realizar o treinamento do modelo. Executamos um processo de ajuste fino (\emph{fine-tuning}) do \emph{YOLOv8n} (uma versão mais leve do \emph{YOLOv8}), previamente treinado no \emph{dataset} COCO\footnote{\url{https://yolov8.org/yolov8-coco-dataset/}} \citep{COCO}.
 
 Para realizar o ajuste fino, foram utilizadas duas abordagens principais:
 
@@ -485,7 +485,7 @@ Para treinar o modelo, utilizamos a rede de computadores (\emph{vision, e-scienc
 
 \subsection{Resultados}
 \label{sec:resultados}
-Com o \emph{dataset} que obtivemos após o processamento e utilizando o \emph{YOLOv8n}, decidimos fazer um treinamento por 300 épocas. As ferramentas fornecidas pela \emph{Ultralytics} facilitam muito esse processo. O parâmetro \emph{EarlyStopping(patience=100)} define que o treinamento para após 100 épocas sem melhorias nas métricas de avaliação. Então, após 183 épocas o treinamento foi finalizado já que o melhor modelo encontrado foi do final da época de número 83. O treino com 183 épocas e utilizando as configurações de hardware mencionadas na seção \ref{sec:treinamento2}, leva cerca de 30 minutos e resulta em um arquivo de pesos de cerca de 6\emph{MB}. Os resultados obtidos podem ser vistos na figura \ref{fig:resultados-treinamento}.
+Com o \emph{dataset} que obtivemos após o processamento e utilizando o \emph{YOLOv8n}, decidimos fazer um treinamento por 300 épocas. As ferramentas fornecidas pela \emph{Ultralytics} facilitam muito esse processo. O parâmetro \emph{EarlyStopping(patience=100)} define que o treinamento para após 100 épocas sem melhorias nas métricas de avaliação. Então, após 183 épocas o treinamento foi finalizado já que o melhor modelo encontrado foi do final da época de número 83. O treino com 183 épocas e utilizando as configurações de hardware mencionadas no capítulo \ref{sec:treinamento2}, leva cerca de 30 minutos e resulta em um arquivo de pesos de cerca de 6\emph{MB}. Os resultados obtidos podem ser vistos na figura \ref{fig:resultados-treinamento}.
 
 \begin{figure}[htb!]
     \centering
@@ -498,7 +498,7 @@ O melhor valor da métrica \emph{mAP\string@50-95} obtido após o treinamento fo
 
 Apesar do intuito do \emph{TomatoHealth} ser a construção de um conjunto de dados robusto no domínio de detecção de doenças em folhas de tomate, pensamos que em um momento inicial é interessante ter um modelo que seja o melhor possível. 
 
-Assim, devido ao pequeno número de exemplos que possuímos inicialmente nesse \emph{dataset}, reconhecemos que essa métrica de 34,437 pode estar superestimada e isso pode ser observado nas figuras \ref{fig:val-pred} e \ref{fig:val-labels} (predições incorretas no conjunto de validação). Então, consideramos uma estratégia para tentar melhorar essa performance inicial. Essa estratégia será discutida na seção \ref{sec:integrando-resultados}.
+Assim, devido ao pequeno número de exemplos que possuímos inicialmente nesse \emph{dataset}, reconhecemos que essa métrica de 34,437 pode estar superestimada e isso pode ser observado nas figuras \ref{fig:val-pred} e \ref{fig:val-labels} (predições incorretas no conjunto de validação). Então, consideramos uma estratégia para tentar melhorar essa performance inicial. Essa estratégia será discutida no capítulo \ref{sec:integrando-resultados}.
 \begin{figure}[H]
     \centering
     \begin{subfigure}[t]{0.45\textwidth}
@@ -510,9 +510,9 @@ Assim, devido ao pequeno número de exemplos que possuímos inicialmente nesse \
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/val_batch0_labels.jpg}
-        \caption{Exemplo de rotulos de objetos. Imagem extraída do acervo dos autores.}
+        \caption{Exemplo de rótulos de objetos. Imagem extraída do acervo dos autores.}
         \label{fig:val-labels}
     \end{subfigure}
-    \caption{Comparação entre a detecção de objetos e os rotulos originais.}
+    \caption{Comparação entre a detecção de objetos e os rótulos originais.}
     \label{fig:comparison}
 \end{figure}

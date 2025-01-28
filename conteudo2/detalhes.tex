@@ -1,14 +1,14 @@
 \chapter{Detalhes sobre a implementação do sistema} \label{sec:implementacao_sistema}
 
-Nessa seção, apresentaremos detalhes técnicos sobre a implementação do sistema \textit{TomatoHealth}, tecnologias utilizadas e decisões do desenvolvimento tomadas para um sistema com as capacidades do descrito na seção \ref{sec:abst-det}.
+Nesse capítulo, apresentaremos detalhes técnicos sobre a implementação do sistema \textit{TomatoHealth}, tecnologias utilizadas e decisões do desenvolvimento tomadas para um sistema com as capacidades do descrito no capítulo \ref{sec:abst-det}.
 
 \section{Arquitetura cliente-servidor e contêineres \emph{Docker}}
 
-O \emph{TomatoHealth} implementa uma arquitetura de cliente-servidor, com dois tipos de clientes diferentes: clientes de usuários comuns e de especialistas, que se diferenciam conforme os requisitos das seções \ref{sec:abst-geral} e \ref{sec:abst-esp}.
+O \emph{TomatoHealth} implementa uma arquitetura de cliente-servidor, com dois tipos de clientes diferentes: clientes de usuários comuns e de especialistas, que se diferenciam conforme os requisitos do capítulo \ref{sec:abst-geral}.
 
-Do ponto de vista da arquitetura cliente-servidor e da descrição abstratas para o usuário geral, os tópicos de mais difícil implementação são: tirar, enviar e receber uma foto para análise; já que entender o papel da ferramenta é uma tarefa do \emph{front-end}. Para realizar essas tarefas difíceis, o cliente faz uma requisição \emph{POST HTTP} enviando uma imagem com o uso da \emph{API FormData}\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/API/FormData}}. E por sua vez, o servidor salva essa imagem no banco de dados \emph{S3 MinIO}, realiza a detecção das classes presentes, faz um prompt para a \emph{LLM} \texttt{gpt-4o-mini} da \emph{OpenAI} por \emph{API}\footnote{\url{https://platform.openai.com/docs/api-reference/introduction}} (pergunta ao modelo como tratar um tomateiro com as doenças detectadas) e finalmente responde o \emph{POST} do cliente com o \emph{output} da \emph{LLM}.
+Do ponto de vista da arquitetura cliente-servidor e da descrição abstrata para o usuário geral, os tópicos de mais difícil implementação são: tirar, enviar e receber uma foto para análise; já que entender o papel da ferramenta é uma tarefa do \emph{front-end}. Para realizar essas tarefas difíceis, o cliente faz uma requisição \emph{POST HTTP} enviando uma imagem com o uso da \emph{API FormData}\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/API/FormData}}. E por sua vez, o servidor salva essa imagem no banco de dados \emph{S3 MinIO}, realiza a detecção das classes presentes, faz um prompt para a \emph{LLM} \texttt{gpt-4o-mini} da \emph{OpenAI} por \emph{API}\footnote{\url{https://platform.openai.com/docs/api-reference/introduction}} (pergunta ao modelo como tratar um tomateiro com as doenças detectadas) e finalmente responde o \emph{POST} do cliente com o \emph{output} da \emph{LLM}.
 
-Já para o cliente especialista, as tarefas de ver as imagens tiradas por usuários comuns e demarcar as diferentes classes são solucionadas com a utilização da ferramenta de anotação \emph{Label Studio}. Essa ferramenta já incluí uma interface de rotulagem de dados que se comunica com o banco onde essas imagens são guardadas, e ela pode ser facilmente alterada para os propósitos da nossa aplicação.
+Já para o cliente especialista, as tarefas de ver as imagens tiradas por usuários comuns e demarcar as diferentes classes são solucionadas com a utilização da ferramenta de anotação \emph{Label Studio}. Essa ferramenta já inclui uma interface de rotulagem de dados que se comunica com o banco onde essas imagens são guardadas, e ela pode ser facilmente alterada para os propósitos da nossa aplicação.
 
 Um modelo simples para nossa arquitetura pode ser visto na figura \ref{fig:modelo_arq}.
 
@@ -27,7 +27,7 @@ Além disso, utilizamos contêineres \emph{Docker} \footnote{\url{https://www.do
 \end{figure}
 
 \section{\emph{Back-end}}
-O \emph{back-end} do projeto foi implementado para contemplar os requisitos da seção \ref{sec:back-end-intro}. A maior parte do código foi feito utilizando \emph{Flask}\footnote{\url{https://flask.palletsprojects.com/en/stable/}}, um \emph{micro-framework Python} para aplicações \textit{web}.
+O \emph{back-end} do projeto foi implementado para contemplar os requisitos do capítulo \ref{sec:back-end-intro}. A maior parte do código foi feito utilizando \emph{Flask}\footnote{\url{https://flask.palletsprojects.com/en/stable/}}, um \emph{micro-framework Python} para aplicações \textit{web}.
 
 Com essa ferramenta, implementamos os seguintes \emph{endpoints} principais (\emph{URL}s que representam funcionalidades no contexto da aplicação):
 \begin{enumerate}
